@@ -13,12 +13,6 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.togetherpet.DataStoreRepository
-import com.example.togetherpet.adapter.PetListAdapter
-import com.example.togetherpet.adapter.SearchingBtnListAdapter
 import com.example.togetherpet.databinding.FragmentSearchingPetBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -27,22 +21,11 @@ import com.kakao.vectormap.KakaoMapReadyCallback
 import com.kakao.vectormap.LatLng
 import com.kakao.vectormap.MapLifeCycleCallback
 import com.kakao.vectormap.camera.CameraUpdateFactory
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import java.lang.Exception
-import javax.inject.Inject
 
-@AndroidEntryPoint
 class SearchingPetFragment : Fragment() {
-    @Inject
-    lateinit var dataStoreRepository: DataStoreRepository
-    private val searchingViewModel: SearchingViewModel by viewModels()
-
     private var _binding: FragmentSearchingPetBinding? = null
     private val binding get() = _binding!!
-
-    private lateinit var searchingBtnListAdapter: SearchingBtnListAdapter
 
     //Google Play 위치 API
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -50,8 +33,8 @@ class SearchingPetFragment : Fragment() {
 
     private var kakaoMap: KakaoMap? = null
 
-    private var latitude: Double = 0.0
-    private var longitude: Double = 0.0
+    private var latitude : Double = 0.0
+    private var longitude : Double = 0.0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -84,85 +67,12 @@ class SearchingPetFragment : Fragment() {
                 checkLocationPermission()
             }
 
-            /*override fun getPosition(): LatLng {
+            override fun getPosition(): LatLng {
                 return super.getPosition()
-            }*/
+            }
         })
 
-
-
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.researchingBtnList.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
-        binding.searchingMissingList.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
-        //btnList 사이의 간격 설정
-        binding.researchingBtnList.addItemDecoration(ItemSpacing(20))
-
-        //RecyclerView 초기화 시 실종 정보를 보여줌
-        viewLifecycleOwner.lifecycleScope.launch {
-            searchingViewModel.missingPets.collectLatest { missingInfo ->
-                binding.searchingMissing.visibility = View.VISIBLE
-                binding.myPetMissingRegisterButton.visibility = View.VISIBLE
-                binding.searchingReportBtn.visibility = View.GONE
-                binding.searchingMissingList.adapter =
-                    PetListAdapter(requireContext(), missingInfo)
-            }
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            searchingViewModel.loadData()
-            dataStoreRepository.missingStatus.collect { isMissing ->
-                searchingViewModel.petName.collect { petName ->
-                    searchingBtnListAdapter =
-                        SearchingBtnListAdapter(isMissing, petName) { clickedItem ->
-                            when (clickedItem) {
-                                "실종 정보" -> {
-                                    binding.searchingMissing.visibility = View.VISIBLE
-                                    binding.myPetMissingRegisterButton.visibility = View.VISIBLE
-                                    binding.searchingReportBtn.visibility = View.GONE
-                                    viewLifecycleOwner.lifecycleScope.launch {
-                                        searchingViewModel.missingPets.collectLatest { missingInfo ->
-                                            binding.searchingMissingList.adapter =
-                                                PetListAdapter(requireContext(), missingInfo)
-                                        }
-                                    }
-                                }
-                                //<추후> 제보 정보 데이터 적용
-                                "제보 정보" -> {
-                                    binding.myPetMissingRegisterButton.visibility = View.GONE
-                                    binding.searchingMissing.visibility = View.GONE
-                                    binding.searchingReportBtn.visibility = View.VISIBLE
-                                }
-
-                                petName -> {
-                                    binding.myPetMissingRegisterButton.visibility = View.GONE
-                                    binding.searchingMissing.visibility = View.GONE
-                                    binding.searchingReportBtn.visibility = View.GONE
-                                }
-                            }
-                        }
-                    binding.researchingBtnList.adapter = searchingBtnListAdapter
-                }
-            }
-        }
-        /*//scroll 효과
-        binding.searchingMissing.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
-            if (scrollY > oldScrollY) {
-                // RecyclerView 숨기기
-                binding.searchingMissingList.visibility = View.GONE
-            } else if (scrollY < oldScrollY) {
-                // RecyclerView 다시 보이기
-                binding.searchingMissingList.visibility = View.VISIBLE
-            }
-        }*/
     }
 
     @SuppressLint("MissingPermission")
@@ -189,7 +99,7 @@ class SearchingPetFragment : Fragment() {
                 latitude = it.latitude
                 longitude = it.longitude
                 Log.d("yeong", "현재 위치: $latitude / $longitude")
-                displayLocation(latitude, longitude)
+                displayLocation(latitude,longitude)
             }
     }
 
