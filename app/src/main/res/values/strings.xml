@@ -20,4 +20,7 @@
     <string name="home_avg_distance">/평균 %skm</string>
     <string name="home_avg_time">/평균 %s</string>
     <string name="searching_myPet_missing_btn">내 반려동물 실종등록</string>
+    <string name="searching_missing_info_btn">실종 정보</string>
+    <string name="searching_report_info_btn">제보 정보</string>
+    <string name="searching_report_btn">목격 제보</string>
 </resources>

@@ -8,4 +8,5 @@
     <color name="walking_start_color">#FCECE7</color>
     <color name="dark_gray">#979797</color>
     <color name="light_gray">#F8F8F8</color>
+    <color name="researching_btn">#33DEDCDC</color>
 </resources>
