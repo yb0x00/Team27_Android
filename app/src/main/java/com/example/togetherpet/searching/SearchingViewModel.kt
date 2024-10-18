@@ -25,7 +25,6 @@ class SearchingViewModel @Inject constructor(
     //실종 동물 데이터
     private val _missingPets = MutableStateFlow<List<Missing>>(emptyList())
     val missingPets: StateFlow<List<Missing>> get() = _missingPets.asStateFlow()
-
     init {
         loadData()
     }
