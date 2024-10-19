@@ -35,7 +35,6 @@ import com.kakao.vectormap.KakaoMapReadyCallback
 import com.kakao.vectormap.LatLng
 import com.kakao.vectormap.MapLifeCycleCallback
 import com.kakao.vectormap.camera.CameraUpdateFactory
-import com.kakao.vectormap.label.BadgeOptions
 import com.kakao.vectormap.label.LabelManager
 import com.kakao.vectormap.label.LabelOptions
 import com.kakao.vectormap.label.LabelStyle
@@ -111,44 +110,66 @@ class SearchingPetFragment : Fragment() {
     private fun setMarker() {
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
             val labelManager: LabelManager? = kakaoMap?.labelManager
+            searchingViewModel.selectedBtn.collectLatest { selectedBtn ->
+                //추후에 제보 정보, 자신의 반려견 버튼을 클릭 했을 때 로직 추가
+                if (selectedBtn == "실종 정보") {
+                    labelManager?.clearAll()
+                    searchingViewModel.missingPets.collectLatest { missingInfo ->
+                        for (pet in missingInfo) {
+                            //url -> bitmap
+                            val petImg = convertBitmapFromURL(pet.missingPetImgUrl)
+                            //bitmap -> 원형
+                            val circlePetImg = getBitmapCircleCrop(petImg, 120, 120)
 
-            searchingViewModel.missingPets.collectLatest { missingInfo ->
-                for (pet in missingInfo) {
-                    //url -> bitmap
-                    val petImg = convertBitmapFromURL(pet.missingPetImgUrl)
-                    //bitmap -> 원형
-                    val circlePetImg = getBitmapCircleCrop(petImg, 120, 120)
+                            val markerBitmap =
+                                BitmapFactory.decodeResource(resources, R.drawable.map_marker_icon)
+                            val scaledMarkerBitmap =
+                                Bitmap.createScaledBitmap(markerBitmap, 220, 250, false)
 
-                    val markerBitmap = BitmapFactory.decodeResource(resources, R.drawable.map_marker_icon)
-                    val scaledMarkerBitmap = Bitmap.createScaledBitmap(markerBitmap, 220, 250, false)
+                            val offsetY = 37 * resources.displayMetrics.density
 
-                    val offsetY = 37 * resources.displayMetrics.density
+                            val bitmapImg =
+                                circlePetImg?.let {
+                                    combineBitmaps(
+                                        scaledMarkerBitmap,
+                                        it,
+                                        offsetY
+                                    )
+                                }
 
-                    val bitmapImg = circlePetImg?.let { combineBitmaps(scaledMarkerBitmap,it,offsetY) }
+                            val markerStyle =
+                                labelManager?.addLabelStyles(
+                                    LabelStyles.from(
+                                        LabelStyle.from(
+                                            bitmapImg
+                                        )
+                                    )
+                                )
 
-                    val markerStyle =
-                        labelManager?.addLabelStyles(LabelStyles.from(LabelStyle.from(bitmapImg)))
+                            /*val imgStyle =
+                                labelManager?.addLabelStyles(LabelStyles.from(LabelStyle.from(circlePetImg)))*/
 
-                    /*val imgStyle =
-                        labelManager?.addLabelStyles(LabelStyles.from(LabelStyle.from(circlePetImg)))*/
+                            //위치 지정
+                            val pos = LatLng.from(pet.missingLatitude, pet.missingLongitude)
 
-                    //위치 지정
-                    val pos = LatLng.from(pet.missingLatitude, pet.missingLongitude)
+                            //2) 라벨을 2개 띄우는 방법
+                            /*val markerLabel =
+                                labelManager?.layer?.addLabel(LabelOptions.from(pos).setStyles(markerStyle))
+                            val imgLabel =
+                                labelManager?.layer?.addLabel(LabelOptions.from(pos).setStyles(imgStyle))*/
 
-                    //2) 라벨을 2개 띄우는 방법
-                    /*val markerLabel =
-                        labelManager?.layer?.addLabel(LabelOptions.from(pos).setStyles(markerStyle))
-                    val imgLabel =
-                        labelManager?.layer?.addLabel(LabelOptions.from(pos).setStyles(imgStyle))*/
+                            //markerLabel?.addBadge(circlePetImg?.let { BadgeOptions.from(it).setOffset(0f,offsetY) })
+                            //markerLabel?.addShareTransform(imgLabel)
 
-                    //markerLabel?.addBadge(circlePetImg?.let { BadgeOptions.from(it).setOffset(0f,offsetY) })
-                    //markerLabel?.addShareTransform(imgLabel)
-
-                    //레이어 가져 오기
-                    val layer = labelManager?.layer
-                    //레이어 라벨 추가
-                    layer?.addLabel(LabelOptions.from(pos).setStyles(markerStyle))
-                    //layer?.addLabel(LabelOptions.from(pos).setStyles(imgStyle))
+                            //레이어 가져 오기
+                            val layer = labelManager?.layer
+                            //레이어 라벨 추가
+                            layer?.addLabel(LabelOptions.from(pos).setStyles(markerStyle))
+                            //layer?.addLabel(LabelOptions.from(pos).setStyles(imgStyle))
+                        }
+                    }
+                } else if (selectedBtn == "제보 정보") {
+                    labelManager?.clearAll()
                 }
             }
         }
@@ -157,7 +178,8 @@ class SearchingPetFragment : Fragment() {
     // 두 비트맵을 하나로 합쳐 겹치는 이미지 생성
     private fun combineBitmaps(markerBitmap: Bitmap, petBitmap: Bitmap, offsetY: Float): Bitmap {
         // 마커 이미지 크기와 동일한 크기의 새 비트맵을 생성
-        val resultBitmap = Bitmap.createBitmap(markerBitmap.width, markerBitmap.height, markerBitmap.config)
+        val resultBitmap =
+            Bitmap.createBitmap(markerBitmap.width, markerBitmap.height, markerBitmap.config)
         val canvas = Canvas(resultBitmap)
 
         // 마커 비트맵을 먼저 그리기
@@ -250,6 +272,7 @@ class SearchingPetFragment : Fragment() {
                 binding.searchingReportBtn.visibility = View.GONE
                 binding.searchingMissingList.adapter =
                     PetListAdapter(requireContext(), missingInfo)
+                searchingViewModel.pushBtn("실종 정보")
             }
         }
 
@@ -261,6 +284,7 @@ class SearchingPetFragment : Fragment() {
                         SearchingBtnListAdapter(isMissing, petName) { clickedItem ->
                             when (clickedItem) {
                                 "실종 정보" -> {
+                                    searchingViewModel.pushBtn("실종 정보")
                                     binding.searchingMissing.visibility = View.VISIBLE
                                     binding.myPetMissingRegisterButton.visibility = View.VISIBLE
                                     binding.searchingReportBtn.visibility = View.GONE
@@ -273,12 +297,14 @@ class SearchingPetFragment : Fragment() {
                                 }
                                 //<추후> 제보 정보 데이터 적용
                                 "제보 정보" -> {
+                                    searchingViewModel.pushBtn("제보 정보")
                                     binding.myPetMissingRegisterButton.visibility = View.GONE
                                     binding.searchingMissing.visibility = View.GONE
                                     binding.searchingReportBtn.visibility = View.VISIBLE
                                 }
 
                                 petName -> {
+                                    searchingViewModel.pushBtn(petName)
                                     binding.myPetMissingRegisterButton.visibility = View.GONE
                                     binding.searchingMissing.visibility = View.GONE
                                     binding.searchingReportBtn.visibility = View.GONE

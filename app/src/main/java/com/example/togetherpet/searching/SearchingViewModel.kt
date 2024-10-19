@@ -22,6 +22,9 @@ class SearchingViewModel @Inject constructor(
     private val _petName = MutableStateFlow<String?>(null)
     val petName: StateFlow<String?> get() = _petName.asStateFlow()
 
+    private val _selectedBtn = MutableStateFlow<String?>(null)
+    val selectedBtn: StateFlow<String?> get() = _selectedBtn.asStateFlow()
+
     //실종 동물 데이터
     private val _missingPets = MutableStateFlow<List<Missing>>(emptyList())
     val missingPets: StateFlow<List<Missing>> get() = _missingPets.asStateFlow()
@@ -46,5 +49,9 @@ class SearchingViewModel @Inject constructor(
 
     private suspend fun loadUserData(): User? {
         return userRepository.getUserById(1)
+    }
+
+    fun pushBtn(btn : String){
+        _selectedBtn.value = btn
     }
 }
