@@ -23,4 +23,9 @@
     <string name="searching_missing_info_btn">실종 정보</string>
     <string name="searching_report_info_btn">제보 정보</string>
     <string name="searching_report_btn">목격 제보</string>
+    <string name="missing_bottom_species">종</string>
+    <string name="missing_bottom_age">나이</string>
+    <string name="missing_bottom_missingPlace">실종 장소</string>
+    <string name="missing_bottom_addInfo">특이 사항</string>
+    <string name="missing_bottom_report_btn">제보 하기</string>
 </resources>
