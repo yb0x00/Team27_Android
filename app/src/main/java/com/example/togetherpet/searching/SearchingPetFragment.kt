@@ -21,7 +21,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.togetherpet.DataStoreRepository
 import com.example.togetherpet.R
@@ -171,7 +173,7 @@ class SearchingPetFragment : Fragment() {
                         }
 
 
-                        withContext(Dispatchers.Main){
+                        withContext(Dispatchers.Main) {
                             // 라벨 클릭 리스너 설정
                             kakaoMap?.setOnLabelClickListener { _, _, label ->
                                 label?.let {
@@ -183,25 +185,32 @@ class SearchingPetFragment : Fragment() {
                                         searchingViewModel.fetchMissingPetById(missingId)
 
                                         //bottomSheet 중복 생성 방지
-                                        val existingFragment = childFragmentManager.findFragmentByTag("bottom_sheet")
-                                        if (existingFragment == null){
-                                            viewLifecycleOwner.lifecycleScope.launch {
-                                                val selectedPet = searchingViewModel.selectedPet.first()
-                                                Log.d("yeong","BottomSheet 표시 전")
-                                                //BottomSheet 표시
-                                                val bottomSheet = MissingBottomSheetFragment()
-                                                // BottomSheet 나타내기
-                                                bottomSheet.show(childFragmentManager, "bottom_sheet")
-                                                Log.d("yeong","bottomSheet 표시 후")
+                                        val existingFragment =
+                                            childFragmentManager.findFragmentByTag("bottom_sheet") as? MissingBottomSheetFragment
+                                        existingFragment?.dismiss()
 
-                                                bottomSheet.updateBottomSheet(
-                                                    petName = selectedPet.missingPetName,
-                                                    species = "-",
-                                                    age = "-",
-                                                    missingPlace = selectedPet.missingPlace,
-                                                    addInfo = "-",
-                                                    url = selectedPet.missingPetImgUrl
-                                                )
+                                        viewLifecycleOwner.lifecycleScope.launch {
+                                            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+                                                searchingViewModel.selectedPet.collect { selectedPet ->
+                                                    //BottomSheet 표시
+                                                    val bottomSheet = MissingBottomSheetFragment()
+                                                    // BottomSheet 나타내기
+                                                    bottomSheet.show(
+                                                        childFragmentManager,
+                                                        "bottom_sheet"
+                                                    )
+                                                    childFragmentManager.executePendingTransactions()
+                                                    Log.d("yeong", "bottomSheet 표시 후")
+
+                                                    bottomSheet.updateBottomSheet(
+                                                        petName = selectedPet.missingPetName,
+                                                        species = "-",
+                                                        age = "-",
+                                                        missingPlace = selectedPet.missingPlace,
+                                                        addInfo = "-",
+                                                        url = selectedPet.missingPetImgUrl
+                                                    )
+                                                }
                                             }
                                         }
                                     }
