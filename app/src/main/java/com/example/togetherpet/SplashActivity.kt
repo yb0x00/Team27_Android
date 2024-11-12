@@ -32,12 +32,12 @@ class SplashActivity : AppCompatActivity() {
             repeatOnLifecycle((Lifecycle.State.STARTED)) {
                 viewModel.userLoginState.collectLatest {
                     delay(3000)
-                    /*if (it) navigateToHome()
-                    else navigateToLogin()*/
+                    if (it) navigateToHome()
+                    else navigateToLogin()
 
-                    //실제 실행
+                    /*//실제 실행
                     if (it) navigateToLogin()
-                    else navigateToHome()
+                    else navigateToHome()*/
                 }
             }
         }
