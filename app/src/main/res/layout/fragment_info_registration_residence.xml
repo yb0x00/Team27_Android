@@ -114,7 +114,7 @@
         android:id="@+id/residence_input_field"
         android:layout_width="338dp"
         android:layout_height="47dp"
-        android:hint="거주지역 선택"
+        android:hint="거주지역 입력"
         android:textColorHint="@color/KTC_red"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -131,7 +131,7 @@
         app:layout_constraintTop_toBottomOf="@id/step_two_circle"
         app:layout_constraintStart_toStartOf="@id/residence_input_field"
         android:layout_marginTop="26dp"
-        android:text="거주 지역을 선택해 주세요.*"
+        android:text="거주 지역을 입력해 주세요.* (행정동까지)"
         android:textAppearance="@style/TogetherPetTextMedium"
         android:includeFontPadding="false"/>
 

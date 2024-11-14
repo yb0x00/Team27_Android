@@ -33,6 +33,7 @@
         android:gravity="center"
         android:textSize="21sp"/>
 
+    <!--
     <TextView
         android:id="@+id/start_pink_button"
         android:layout_width="338dp"
@@ -69,4 +70,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="60dp"/>
+    -->
 </androidx.constraintlayout.widget.ConstraintLayout>

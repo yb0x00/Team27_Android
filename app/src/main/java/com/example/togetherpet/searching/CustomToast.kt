@@ -28,6 +28,4 @@ object CustomToast {
             Log.d("CustomToast", "Toast shown with message: $message")
         }
     }
-
-    //private fun Int.toPx(): Int = (this * Resources.getSystem().displayMetrics.density).toInt()
 }

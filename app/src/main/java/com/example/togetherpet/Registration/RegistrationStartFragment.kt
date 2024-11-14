@@ -34,7 +34,6 @@ class RegistrationStartFragment : Fragment() {
 
         binding?.apply {
             startWhiteButton.setOnClickListener { goToNextScreen() }
-            startPinkButton.setOnClickListener { goToFindScreen() }
         }
     }
 

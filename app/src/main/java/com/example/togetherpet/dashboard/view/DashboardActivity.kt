@@ -9,6 +9,7 @@ import com.example.togetherpet.dashboard.viewModel.DashboardViewModel
 import com.example.togetherpet.R
 import com.example.togetherpet.databinding.ActivityDashboardBinding
 import com.example.togetherpet.home.view.HomeFragment
+import com.example.togetherpet.searching.CustomToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,6 +31,14 @@ class DashboardActivity : AppCompatActivity() {
         //viewModel이 선택한 Fragment 나타내기
         dashboardViewModel.selectedFragment.observe(this) { fragment ->
             setFragment(fragment)
+        }
+
+        binding.boardAlarmBtn.setOnClickListener {
+            CustomToast.displayToast(this, "현재 준비 중인 서비스 입니다")
+        }
+
+        binding.boardSettingBtn.setOnClickListener {
+            CustomToast.displayToast(this, "현재 준비 중인 서비스 입니다")
         }
     }
 

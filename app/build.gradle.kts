@@ -19,11 +19,11 @@ android {
             abiFilters.add("x86")
             abiFilters.add("x86_64")
         }
-        applicationId = "com.example.togetherpet"
+        applicationId = "com.jnu.togetherpet.v1"
         minSdk = 26
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 6
+        versionName = "3.1"
 
         testInstrumentationRunner = "com.example.togetherpet.CustomTestRunner"
 
@@ -55,6 +55,13 @@ android {
 
     buildTypes {
         release {
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+        debug {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),

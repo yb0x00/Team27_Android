@@ -117,7 +117,7 @@
         app:layout_constraintTop_toBottomOf="@id/age_input_field"
         app:layout_constraintStart_toStartOf="@id/species_input_field"
         android:layout_marginTop="27dp"
-        android:text="종을 선택해 주세요."
+        android:text="종을 입력해 주세요."
         android:textAppearance="@style/TogetherPetTextMedium"
         android:includeFontPadding="false"/>
 
@@ -126,7 +126,7 @@
         android:id="@+id/species_input_field"
         android:layout_width="338dp"
         android:layout_height="47dp"
-        android:hint="종 선택"
+        android:hint="종 입력"
         android:textColorHint="@color/KTC_red"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
