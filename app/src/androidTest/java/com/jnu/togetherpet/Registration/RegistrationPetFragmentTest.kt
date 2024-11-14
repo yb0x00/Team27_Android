@@ -89,25 +89,25 @@ class RegistrationPetFragmentTest {
             Navigation.setViewNavController(requireView(), navController)
             val viewModel: RegistrationViewModel by activityViewModels()
 
-                job = lifecycleScope.launch {
-                    viewModel.petName.collect { value ->
-                        collectedPetName = value
-                    }
+            job = lifecycleScope.launch {
+                viewModel.petName.collect { value ->
+                    collectedPetName = value
                 }
-                jobTwo = lifecycleScope.launch {
-                    viewModel.petAge.collect { value ->
-                        collectedPetAge = value
-                    }
+            }
+            jobTwo = lifecycleScope.launch {
+                viewModel.petAge.collect { value ->
+                    collectedPetAge = value
                 }
-                jobThree = lifecycleScope.launch {
-                    viewModel.petSpecies.collect { value ->
-                        collectedSpecies = value
-                    }
+            }
+            jobThree = lifecycleScope.launch {
+                viewModel.petSpecies.collect { value ->
+                    collectedSpecies = value
                 }
-                jobFour = lifecycleScope.launch {
-                    viewModel.neutering.collect { value ->
-                        collectedNeutering = value
-                    }
+            }
+            jobFour = lifecycleScope.launch {
+                viewModel.neutering.collect { value ->
+                    collectedNeutering = value
+                }
             }
         }
 

@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     android:background="@drawable/missing_bottom_sheet">
-    
+
     <ImageView
         android:layout_width="110dp"
         android:layout_height="5dp"

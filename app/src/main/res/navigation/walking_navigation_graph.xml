@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/walking_navigation_graph"
-    app:startDestination="@id/walkingPetFragment">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/walking_navigation_graph"
+        app:startDestination="@id/walkingPetFragment">
 
     <fragment
-        android:id="@+id/walkingPetFragment"
-        android:name="com.jnu.togetherpet.fragment.WalkingPetFragment"
-        android:label="fragment_walking_pet"
-        tools:layout="@layout/fragment_walking_pet" >
+            android:id="@+id/walkingPetFragment"
+            android:name="com.jnu.togetherpet.fragment.WalkingPetFragment"
+            android:label="fragment_walking_pet"
+            tools:layout="@layout/fragment_walking_pet" >
         <action
-            android:id="@+id/action_walkingPetFragment_to_walkingPetResultFragment"
-            app:destination="@id/walkingPetResultFragment" />
+                android:id="@+id/action_walkingPetFragment_to_walkingPetResultFragment"
+                app:destination="@id/walkingPetResultFragment" />
     </fragment>
     <fragment
-        android:id="@+id/walkingPetResultFragment"
-        android:name="com.jnu.togetherpet.fragment.WalkingPetResultFragment"
-        android:label="fragment_walking_pet_result"
-        tools:layout="@layout/fragment_walking_pet_result" />
+            android:id="@+id/walkingPetResultFragment"
+            android:name="com.jnu.togetherpet.fragment.WalkingPetResultFragment"
+            android:label="fragment_walking_pet_result"
+            tools:layout="@layout/fragment_walking_pet_result" />
 </navigation>
