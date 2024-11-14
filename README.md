@@ -7,11 +7,12 @@
 - 프로젝트 소개 및  기획 의도
 - 팀원 구성
 - 배포
-- 아키텍처
 - 개발 문서
 - 프로젝트 브랜치 전략
+- 아키텍처
 - 프로젝트 구조
 - 프로젝트 주요 기능
+- 주요 이슈 사항
 
 <br>
 
@@ -69,3 +70,55 @@ Together Pet은 동물들의 위치 정보를 훨씬 쉽고 빠르게 공유할 
 <br>
 
 ## 배포
+- [원스토어](https://m.onestore.co.kr/ko-kr/apps/appsDetail.omp?prodId=0000779558)에서 다운로드 할 수 있습니다
+
+  
+<img src="https://github.com/user-attachments/assets/0bbd105c-dc2d-4db9-99a8-1d948aaa245d" height=450 width=220>
+
+<br>
+
+<details>
+  <summary>추가 정보</summary>
+    <br>
+  <div style="margin-left: 20px;">
+    <ul>
+      <li>위치 정보를 원활하게 활용하기 위해 <strong>아마존 앱스토어</strong> 배포를 시도하였습니다.</li>
+      <li>원할한 앱 동작을 위해 Retrofit 관련 ProGuard 규칙을 추가하여 아마존 앱스토어에 업데이트 버전을 등록하는 것을 고려하고 있습니다.
+        <br>
+          <br>
+        <img src="https://github.com/user-attachments/assets/2504d4ed-c522-4829-b3ab-2469d1c8ecf9" height="450" width="220" style="margin-left: 20px;">
+      </li>
+    </ul>
+  </div>
+</details>
+
+<br>
+
+## 개발 문서
+- 와이어프레임()
+- [API 명세서](https://quickest-asterisk-75d.notion.site/API-6d3b77b528b14cfa8b7dc8cd81d95872)
+- 개발 환경 설정
+  
+- 프로젝트 브랜치 전략
+   ![image](https://github.com/user-attachments/assets/0b00dde1-7cc4-4689-b640-7bb5842bddb1)
+
+<br>
+
+## 아키텍처
+- 데이터베이스 설계도
+  
+- 데이터 흐름도
+  
+
+<br>
+
+## 프로젝트 구조
+
+<br>
+
+## 프로젝트 주요 기능
+
+
+<br>
+
+## 주요 이슈 사항
