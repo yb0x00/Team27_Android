@@ -27,10 +27,11 @@ Together Pet은 동물들의 위치 정보를 훨씬 쉽고 빠르게 공유할 
 
 ![image](https://github.com/user-attachments/assets/da2dece5-5927-42b8-a7c2-7e5491b2a701)
 반려동물을 찾는 것을 돕는 큰 힘은 바로 **지역 커뮤니티**라고 생각하였습니다.
-<br>반려동물 산책을 기록하는 기능을 통해 산책 중에 실종 반려동물 정보를 쉽게 열람하고 정보를 공유하도록 하였습니다.
+<br>산책 기록 기능을 통해 사람들이 일상적으로 앱을 사용할 수 있게 하고,
+<br>산책 중 실종 반려동물 정보를 손쉽게 열람하고 공유할 수 있도록 하여 함께 찾기에 대한 참여를 독려합니다.
 <br>커뮤니티를 활성화하기 위해 추가로 반려 일기와 우리 동네 커뮤니티 기능을 제공할 예정입니다.
 
-지역 중심의 반려인 커뮤니티를 기반으로 실종 반려동물 찾기를 자연스럽게 도울 수 있는 플랫폼을 제공하여
+지역 중심의 반려인 커뮤니티를 기반으로, 실종 반려동물 찾기를 자연스럽게 돕는 플랫폼을 제공하여
 <br>서로 도움을 주고받을 수 있는 생태계를 구축하고자 합니다.
 
 
@@ -58,14 +59,14 @@ Together Pet은 동물들의 위치 정보를 훨씬 쉽고 빠르게 공유할 
 |:----------------------------------------------------------------------------------------------------------------:|
 | <img src="https://github.com/user-attachments/assets/df8f872f-6dd4-47fd-934c-10aede3eafb2" height=150 width=150> |
 |                                                  **BE_테크리더**                                                  |
-|                                                  서버와의 데이터 송수신 기능 <br>코드 작성에 기여                                               |
+|                                                  서버와의 데이터 송수신 기능                                               |
 
 </div>
 
 
 > :computer: **Note**
 >
-> 백엔드 팀 구성은 [백엔드](https://github.com/kakao-tech-campus-2nd-step3/Team27_BE)에서 확인 가능합니다
+> 백엔드 팀 구성은 [백엔드 레포](https://github.com/kakao-tech-campus-2nd-step3/Team27_BE)에서 확인 가능합니다
 
 <br>
 
@@ -95,14 +96,31 @@ Together Pet은 동물들의 위치 정보를 훨씬 쉽고 빠르게 공유할 
 <br>
 
 ## 개발 문서
-- 와이어프레임()
-- [API 명세서](https://quickest-asterisk-75d.notion.site/API-6d3b77b528b14cfa8b7dc8cd81d95872)
-- 개발 환경 설정
+- [와이어프레임](https://www.figma.com/proto/5j2O200pBFZDR4bAit5Iam/KTC-27%EC%A1%B0?node-id=1860-4058&node-type=section&t=fFr1Y5zW9251MUsz-1&scaling=scale-down&content-scaling=fixed&page-id=85%3A1081&starting-point-node-id=423%3A4217&show-proto-sidebar=1)
+  <br>
   
-- 프로젝트 브랜치 전략
-   ![image](https://github.com/user-attachments/assets/0b00dde1-7cc4-4689-b640-7bb5842bddb1)
+- [API 명세서](https://quickest-asterisk-75d.notion.site/API-6d3b77b528b14cfa8b7dc8cd81d95872)
+  <br>
+  
+- 개발 환경 설정
+    * 안드로이드 스튜디오 버전 : Android Studio Iguana | 2023.2.1 Patch 2
+    * java 버전 : 23.0.1
+    * Android Gradle Plugin 버전 : 8.3.1
+    * Gradle 버전 : 8.4
+    * Sdk 버전
+        + compileSdk : 34
+        + minSdk : 26
+        + targetSdk : 34
+    * 카카오맵 사용을 위해 실물 기기를 사용하는 것을 권장
+    * API 키 사용 : 팀원이 요청할 시 Github Secrets를 통해 공유
 
 <br>
+
+    
+  * 프로젝트 브랜치 전략
+
+  <img src="https://github.com/user-attachments/assets/0b00dde1-7cc4-4689-b640-7bb5842bddb1" alt="환경 설정" style="margin-right: 20px;">
+
 
 ## 아키텍처
 - 데이터베이스 설계도
